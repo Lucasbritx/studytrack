@@ -1,14 +1,16 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getGroupWithMembers, getUserMembership } from '@/lib/queries/groups'
+import { getUpcomingMeetingsByGroup, getPastMeetingsByGroup } from '@/lib/queries/meetings'
 import { createClient } from '@/lib/supabase/server'
-import { PageHeader } from '@/components/shared/page-header'
 import { GroupActions } from '@/components/groups/group-actions'
 import { MemberList } from '@/components/groups/member-list'
 import { InviteCodeCard } from '@/components/groups/invite-code-card'
+import { MeetingList } from '@/components/meetings/meeting-list'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Settings, Calendar, Globe, Lock } from 'lucide-react'
 
 interface GroupPageProps {
@@ -45,6 +47,11 @@ export default async function GroupPage({ params }: GroupPageProps) {
 
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
+
+  const [upcomingMeetings, pastMeetings] = await Promise.all([
+    getUpcomingMeetingsByGroup(id),
+    getPastMeetingsByGroup(id),
+  ])
 
   return (
     <div className="space-y-6">
@@ -90,16 +97,30 @@ export default async function GroupPage({ params }: GroupPageProps) {
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">Upcoming Meetings</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                No upcoming meetings scheduled.
-              </p>
-            </CardContent>
-          </Card>
+          <Tabs defaultValue="upcoming" className="w-full">
+            <TabsList>
+              <TabsTrigger value="upcoming">
+                Upcoming ({upcomingMeetings.length})
+              </TabsTrigger>
+              <TabsTrigger value="past">
+                Past ({pastMeetings.length})
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="upcoming" className="mt-4">
+              <MeetingList 
+                meetings={upcomingMeetings} 
+                groupId={id}
+                emptyMessage="No upcoming meetings. Schedule one to get started!"
+              />
+            </TabsContent>
+            <TabsContent value="past" className="mt-4">
+              <MeetingList 
+                meetings={pastMeetings} 
+                groupId={id}
+                emptyMessage="No past meetings yet."
+              />
+            </TabsContent>
+          </Tabs>
         </div>
 
         <div className="space-y-6">
