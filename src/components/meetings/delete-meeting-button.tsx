@@ -39,11 +39,9 @@ export function DeleteMeetingButton({ meetingId, groupId }: DeleteMeetingButtonP
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="destructive" size="sm">
-          <Trash2 className="mr-2 h-4 w-4" />
-          Delete Meeting
-        </Button>
+      <AlertDialogTrigger className="inline-flex shrink-0 items-center justify-center rounded-lg h-8 gap-1.5 px-2.5 text-sm font-medium bg-destructive/10 text-destructive hover:bg-destructive/20">
+        <Trash2 className="mr-2 h-4 w-4" />
+        Delete Meeting
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

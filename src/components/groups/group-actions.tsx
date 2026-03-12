@@ -51,11 +51,9 @@ export function GroupActions({ groupId, isAdmin }: GroupActionsProps) {
   return (
     <div className="flex gap-2">
       <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <Button variant="outline" size="sm">
-            <LogOut className="mr-2 h-4 w-4" />
-            Leave Group
-          </Button>
+        <AlertDialogTrigger className="inline-flex shrink-0 items-center justify-center rounded-lg h-8 gap-1.5 px-2.5 text-sm font-medium border border-border bg-background hover:bg-muted">
+          <LogOut className="mr-2 h-4 w-4" />
+          Leave Group
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -76,11 +74,9 @@ export function GroupActions({ groupId, isAdmin }: GroupActionsProps) {
 
       {isAdmin && (
         <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button variant="destructive" size="sm">
-              <Trash2 className="mr-2 h-4 w-4" />
-              Delete Group
-            </Button>
+          <AlertDialogTrigger className="inline-flex shrink-0 items-center justify-center rounded-lg h-8 gap-1.5 px-2.5 text-sm font-medium bg-destructive/10 text-destructive hover:bg-destructive/20">
+            <Trash2 className="mr-2 h-4 w-4" />
+            Delete Group
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>

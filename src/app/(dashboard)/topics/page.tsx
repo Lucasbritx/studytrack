@@ -15,12 +15,12 @@ export default async function TopicsPage() {
         title="Study Topics"
         description="Manage your learning topics"
       >
-        <Button asChild>
-          <Link href="/topics/new">
+        <Link href="/topics/new">
+          <Button>
             <PlusIcon className="mr-2 h-4 w-4" />
             New Topic
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </PageHeader>
 
       {topics.length === 0 ? (
@@ -29,12 +29,12 @@ export default async function TopicsPage() {
           title="No topics yet"
           description="Create your first study topic to start tracking your learning."
           action={
-            <Button asChild>
-              <Link href="/topics/new">
+            <Link href="/topics/new">
+              <Button>
                 <PlusIcon className="mr-2 h-4 w-4" />
                 Create Topic
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           }
         />
       ) : (

@@ -16,11 +16,9 @@ export function GroupList({ groups }: GroupListProps) {
   if (groups.length === 0) {
     return (
       <EmptyState
-        icon={Users}
+        icon={<Users className="h-12 w-12" />}
         title="No groups yet"
         description="Create a new mentorship group or join an existing one with an invite code."
-        actionLabel="Create Group"
-        actionHref="/groups/new"
       />
     )
   }

@@ -33,7 +33,7 @@ export async function createMeeting(
 
   const validated = meetingSchema.safeParse(rawData)
   if (!validated.success) {
-    return { error: validated.error.errors[0].message }
+    return { error: validated.error.issues[0].message }
   }
 
   // Combine date and time into ISO string
@@ -86,7 +86,7 @@ export async function updateMeeting(
 
   const validated = meetingSchema.safeParse(rawData)
   if (!validated.success) {
-    return { error: validated.error.errors[0].message }
+    return { error: validated.error.issues[0].message }
   }
 
   // Combine date and time into ISO string

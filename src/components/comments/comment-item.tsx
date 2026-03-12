@@ -88,19 +88,15 @@ export function CommentItem({
           </span>
           {canDelete && (
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
-                  disabled={isDeleting}
-                >
-                  {isDeleting ? (
-                    <Loader2 className="h-3 w-3 animate-spin" />
-                  ) : (
-                    <MoreVertical className="h-3 w-3" />
-                  )}
-                </Button>
+              <DropdownMenuTrigger 
+                className="inline-flex shrink-0 items-center justify-center rounded-lg h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-muted disabled:pointer-events-none disabled:opacity-50"
+                disabled={isDeleting}
+              >
+                {isDeleting ? (
+                  <Loader2 className="h-3 w-3 animate-spin" />
+                ) : (
+                  <MoreVertical className="h-3 w-3" />
+                )}
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem 

@@ -29,7 +29,7 @@ export async function createGroup(
 
   const validated = groupSchema.safeParse(rawData)
   if (!validated.success) {
-    return { error: validated.error.errors[0].message }
+    return { error: validated.error.issues[0].message }
   }
 
   const { data, error } = await supabase
@@ -70,7 +70,7 @@ export async function updateGroup(
 
   const validated = groupSchema.safeParse(rawData)
   if (!validated.success) {
-    return { error: validated.error.errors[0].message }
+    return { error: validated.error.issues[0].message }
   }
 
   const { error } = await supabase
@@ -125,7 +125,7 @@ export async function joinGroup(
 
   const validated = joinGroupSchema.safeParse({ invite_code: inviteCode })
   if (!validated.success) {
-    return { error: validated.error.errors[0].message }
+    return { error: validated.error.issues[0].message }
   }
 
   // Find group by invite code

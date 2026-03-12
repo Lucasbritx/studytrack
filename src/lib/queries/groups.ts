@@ -77,10 +77,10 @@ export async function getGroupWithMembers(id: string) {
   return {
     ...group,
     members: members.map(m => ({
+      ...m.profiles,
       id: m.id,
       role: m.role,
       joined_at: m.joined_at,
-      ...m.profiles,
     })),
   }
 }

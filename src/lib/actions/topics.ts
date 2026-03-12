@@ -31,7 +31,7 @@ export async function createTopic(
 
   const validated = topicSchema.safeParse(rawData)
   if (!validated.success) {
-    return { error: validated.error.errors[0].message }
+    return { error: validated.error.issues[0].message }
   }
 
   const { error } = await supabase.from('topics').insert({
@@ -70,7 +70,7 @@ export async function updateTopic(
 
   const validated = topicSchema.safeParse(rawData)
   if (!validated.success) {
-    return { error: validated.error.errors[0].message }
+    return { error: validated.error.issues[0].message }
   }
 
   const { error } = await supabase

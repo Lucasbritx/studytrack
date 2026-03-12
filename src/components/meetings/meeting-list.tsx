@@ -17,11 +17,9 @@ export function MeetingList({ meetings, groupId, emptyMessage }: MeetingListProp
   if (meetings.length === 0) {
     return (
       <EmptyState
-        icon={Calendar}
+        icon={<Calendar className="h-12 w-12" />}
         title="No meetings"
         description={emptyMessage || "No meetings scheduled yet."}
-        actionLabel="Schedule Meeting"
-        actionHref={`/groups/${groupId}/meetings/new`}
       />
     )
   }

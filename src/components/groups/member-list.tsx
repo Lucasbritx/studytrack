@@ -115,14 +115,15 @@ export function MemberList({ groupId, members, isAdmin, currentUserId }: MemberL
                 
                 {isAdmin && !isCurrentUser && (
                   <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" className="h-8 w-8" disabled={isLoading}>
-                        {isLoading ? (
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                        ) : (
-                          <MoreVertical className="h-4 w-4" />
-                        )}
-                      </Button>
+                    <DropdownMenuTrigger 
+                      className="inline-flex shrink-0 items-center justify-center rounded-lg h-8 w-8 hover:bg-muted disabled:pointer-events-none disabled:opacity-50" 
+                      disabled={isLoading}
+                    >
+                      {isLoading ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <MoreVertical className="h-4 w-4" />
+                      )}
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       {member.role === 'member' ? (

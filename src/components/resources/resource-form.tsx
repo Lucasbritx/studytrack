@@ -44,14 +44,16 @@ export function ResourceForm({ topicId, meetingId, trigger }: ResourceFormProps)
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        {trigger || (
-          <Button size="sm">
-            <PlusIcon className="mr-2 h-4 w-4" />
-            Add Resource
-          </Button>
-        )}
-      </DialogTrigger>
+      {trigger ? (
+        <DialogTrigger className="inline-flex shrink-0 items-center justify-center">
+          {trigger}
+        </DialogTrigger>
+      ) : (
+        <DialogTrigger className="inline-flex shrink-0 items-center justify-center rounded-lg h-8 gap-1.5 px-2.5 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/80">
+          <PlusIcon className="mr-2 h-4 w-4" />
+          Add Resource
+        </DialogTrigger>
+      )}
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Add Resource</DialogTitle>

@@ -41,11 +41,9 @@ export function DeleteSessionButton({ sessionId }: DeleteSessionButtonProps) {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-destructive">
-          <Trash2 className="h-4 w-4" />
-          <span className="sr-only">Delete session</span>
-        </Button>
+      <AlertDialogTrigger className="inline-flex shrink-0 items-center justify-center rounded-lg h-8 w-8 text-muted-foreground hover:text-destructive hover:bg-muted">
+        <Trash2 className="h-4 w-4" />
+        <span className="sr-only">Delete session</span>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

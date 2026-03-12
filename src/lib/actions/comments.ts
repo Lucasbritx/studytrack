@@ -28,7 +28,7 @@ export async function createComment(
 
   const validated = commentSchema.safeParse(rawData)
   if (!validated.success) {
-    return { error: validated.error.errors[0].message }
+    return { error: validated.error.issues[0].message }
   }
 
   const { error } = await supabase
@@ -68,7 +68,7 @@ export async function updateComment(
 
   const validated = commentSchema.safeParse(rawData)
   if (!validated.success) {
-    return { error: validated.error.errors[0].message }
+    return { error: validated.error.issues[0].message }
   }
 
   const { error } = await supabase

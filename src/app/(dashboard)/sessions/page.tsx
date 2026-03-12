@@ -1,10 +1,12 @@
 import { Suspense } from 'react'
+import Link from 'next/link'
 import { getSessions, getSessionStats } from '@/lib/queries/sessions'
 import { PageHeader } from '@/components/shared/page-header'
 import { SessionList } from '@/components/sessions/session-list'
 import { LoadingSpinner } from '@/components/shared/loading-spinner'
 import { Card, CardContent } from '@/components/ui/card'
-import { Clock, Calendar, Flame } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Clock, Calendar, Flame, Plus } from 'lucide-react'
 
 export const metadata = {
   title: 'Study Sessions | StudyTrack',
@@ -70,9 +72,14 @@ export default function SessionsPage() {
       <PageHeader
         title="Study Sessions"
         description="Track your learning progress and build consistent study habits."
-        actionLabel="Log Session"
-        actionHref="/sessions/new"
-      />
+      >
+        <Link href="/sessions/new">
+          <Button>
+            <Plus className="mr-2 h-4 w-4" />
+            Log Session
+          </Button>
+        </Link>
+      </PageHeader>
 
       <Suspense fallback={<LoadingSpinner />}>
         <SessionStats />

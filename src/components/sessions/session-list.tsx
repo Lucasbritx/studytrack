@@ -15,11 +15,9 @@ export function SessionList({ sessions }: SessionListProps) {
   if (sessions.length === 0) {
     return (
       <EmptyState
-        icon={Clock}
+        icon={<Clock className="h-12 w-12" />}
         title="No study sessions yet"
         description="Log your first study session to start tracking your learning progress."
-        actionLabel="Log Session"
-        actionHref="/sessions/new"
       />
     )
   }

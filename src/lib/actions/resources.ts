@@ -30,7 +30,7 @@ export async function createResource(
 
   const validated = resourceSchema.safeParse(rawData)
   if (!validated.success) {
-    return { error: validated.error.errors[0].message }
+    return { error: validated.error.issues[0].message }
   }
 
   if (!validated.data.topic_id && !validated.data.meeting_id) {

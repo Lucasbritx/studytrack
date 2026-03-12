@@ -36,11 +36,11 @@ export default async function TopicDetailPage({ params }: TopicDetailPageProps) 
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" asChild>
-          <Link href="/topics">
+        <Link href="/topics">
+          <Button variant="ghost" size="icon">
             <ArrowLeft className="h-4 w-4" />
-          </Link>
-        </Button>
+          </Button>
+        </Link>
         <div className="flex-1">
           <PageHeader title={topic.title}>
             <StatusBadge status={topic.status} />
@@ -139,11 +139,11 @@ export default async function TopicDetailPage({ params }: TopicDetailPageProps) 
         <TabsContent value="sessions" className="space-y-4">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-semibold">Study Sessions</h3>
-            <Button size="sm" asChild>
-              <Link href={`/sessions/new?topicId=${topic.id}`}>
+            <Link href={`/sessions/new?topicId=${topic.id}`}>
+              <Button size="sm">
                 Log Session
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </div>
           {topic.study_sessions && topic.study_sessions.length > 0 ? (
             <div className="space-y-2">

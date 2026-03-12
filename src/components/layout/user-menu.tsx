@@ -30,13 +30,11 @@ export function UserMenu({ email, fullName, avatarUrl }: UserMenuProps) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-9 w-9 rounded-full">
-          <Avatar className="h-9 w-9">
-            <AvatarImage src={avatarUrl || undefined} alt={fullName} />
-            <AvatarFallback>{initials}</AvatarFallback>
-          </Avatar>
-        </Button>
+      <DropdownMenuTrigger className="relative h-9 w-9 rounded-full inline-flex items-center justify-center hover:bg-muted focus:outline-none">
+        <Avatar className="h-9 w-9">
+          <AvatarImage src={avatarUrl || undefined} alt={fullName} />
+          <AvatarFallback>{initials}</AvatarFallback>
+        </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel>
@@ -46,21 +44,21 @@ export function UserMenu({ email, fullName, avatarUrl }: UserMenuProps) {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/profile" className="cursor-pointer">
+        <DropdownMenuItem>
+          <Link href="/profile" className="cursor-pointer flex items-center w-full">
             <User className="mr-2 h-4 w-4" />
             Profile
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/profile" className="cursor-pointer">
+        <DropdownMenuItem>
+          <Link href="/profile" className="cursor-pointer flex items-center w-full">
             <Settings className="mr-2 h-4 w-4" />
             Settings
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <form action={logout}>
+        <DropdownMenuItem>
+          <form action={logout} className="w-full">
             <button type="submit" className="flex w-full items-center cursor-pointer">
               <LogOut className="mr-2 h-4 w-4" />
               Log out

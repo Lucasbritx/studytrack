@@ -22,7 +22,7 @@ export async function login(
 
   const validated = loginSchema.safeParse(rawData)
   if (!validated.success) {
-    return { error: validated.error.errors[0].message }
+    return { error: validated.error.issues[0].message }
   }
 
   const { error } = await supabase.auth.signInWithPassword({
@@ -52,7 +52,7 @@ export async function signup(
 
   const validated = signupSchema.safeParse(rawData)
   if (!validated.success) {
-    return { error: validated.error.errors[0].message }
+    return { error: validated.error.issues[0].message }
   }
 
   const { error } = await supabase.auth.signUp({
