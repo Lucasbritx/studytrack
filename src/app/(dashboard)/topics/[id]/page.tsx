@@ -4,6 +4,7 @@ import { getTopic } from '@/lib/queries/topics'
 import { TopicForm } from '@/components/topics/topic-form'
 import { StatusBadge } from '@/components/topics/status-badge'
 import { DeleteTopicButton } from '@/components/topics/delete-topic-button'
+import { ResourceList } from '@/components/resources/resource-list'
 import { PageHeader } from '@/components/shared/page-header'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -129,43 +130,10 @@ export default async function TopicDetailPage({ params }: TopicDetailPageProps) 
         </TabsContent>
 
         <TabsContent value="resources" className="space-y-4">
-          <div className="flex justify-between items-center">
-            <h3 className="text-lg font-semibold">Resources</h3>
-            <Button size="sm" asChild>
-              <Link href={`/topics/${topic.id}/resources/new`}>
-                Add Resource
-              </Link>
-            </Button>
-          </div>
-          {topic.resources && topic.resources.length > 0 ? (
-            <div className="space-y-2">
-              {topic.resources.map((resource) => (
-                <Card key={resource.id}>
-                  <CardContent className="py-3 flex items-center justify-between">
-                    <div>
-                      <a
-                        href={resource.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-medium hover:underline"
-                      >
-                        {resource.title}
-                      </a>
-                      <p className="text-xs text-muted-foreground capitalize">
-                        {resource.type}
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : (
-            <Card>
-              <CardContent className="py-8 text-center text-muted-foreground">
-                No resources yet. Add articles, videos, or documentation to help with your learning.
-              </CardContent>
-            </Card>
-          )}
+          <ResourceList 
+            resources={topic.resources || []} 
+            topicId={topic.id}
+          />
         </TabsContent>
 
         <TabsContent value="sessions" className="space-y-4">
