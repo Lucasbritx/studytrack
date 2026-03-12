@@ -4,12 +4,13 @@ import { getMeetingWithComments } from '@/lib/queries/meetings'
 import { isUserGroupAdmin, isUserGroupMember } from '@/lib/queries/groups'
 import { createClient } from '@/lib/supabase/server'
 import { DeleteMeetingButton } from '@/components/meetings/delete-meeting-button'
+import { CommentSection } from '@/components/comments/comment-section'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import { Calendar, Clock, User, ArrowLeft, Pencil, FileText, MessageSquare } from 'lucide-react'
+import { Calendar, Clock, ArrowLeft, Pencil, FileText } from 'lucide-react'
 
 interface MeetingPageProps {
   params: Promise<{ id: string; meetingId: string }>
@@ -135,47 +136,13 @@ export default async function MeetingPage({ params }: MeetingPageProps) {
             </Card>
           )}
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base flex items-center gap-2">
-                <MessageSquare className="h-4 w-4" />
-                Comments ({meeting.comments?.length || 0})
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              {meeting.comments && meeting.comments.length > 0 ? (
-                <div className="space-y-4">
-                  {meeting.comments.map((comment: any) => (
-                    <div key={comment.id} className="flex gap-3">
-                      <Avatar className="h-8 w-8">
-                        <AvatarImage src={comment.profiles?.avatar_url ?? undefined} />
-                        <AvatarFallback className="text-xs">
-                          {getInitials(comment.profiles?.full_name, comment.profiles?.username)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium">
-                            {comment.profiles?.full_name || comment.profiles?.username || 'Anonymous'}
-                          </span>
-                          <span className="text-xs text-muted-foreground">
-                            {new Date(comment.created_at).toLocaleDateString()}
-                          </span>
-                        </div>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          {comment.content}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-sm text-muted-foreground">
-                  No comments yet. Be the first to comment!
-                </p>
-              )}
-            </CardContent>
-          </Card>
+          <CommentSection
+            comments={meeting.comments || []}
+            meetingId={meetingId}
+            groupId={groupId}
+            currentUserId={user?.id || ''}
+            isGroupAdmin={isAdmin}
+          />
         </div>
 
         <div className="space-y-6">
